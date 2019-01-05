@@ -3,8 +3,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.Utils.PageUtils;
 import com.bean.CaseBean;
 import com.db.LinkSql;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class CaseDao {
 	private LinkSql ls=null;
@@ -14,9 +17,9 @@ public class CaseDao {
 		ls=new LinkSql();
 		acb=new ArrayList<CaseBean>();
 	}
-	public ArrayList<CaseBean> getCase(String name){
+	public ArrayList<CaseBean> getCase(String name,HttpServletRequest request){
 		String sql=String.format("select * from `Case` where Caudit=1 and Cpatient='%s'", name);
-		System.out.println(sql);
+		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
@@ -35,8 +38,11 @@ public class CaseDao {
 		}
 		return acb;
 	}
-	public ArrayList<CaseBean> getCase(){
+	public ArrayList<CaseBean> getCase(HttpServletRequest request){
 		String sql="select * from `Case` where Caudit=1";
+
+		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
+
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
@@ -56,8 +62,11 @@ public class CaseDao {
 		return acb;
 	}
 	
-	public ArrayList<CaseBean> getCaseCheck(){
+	public ArrayList<CaseBean> getCaseCheck(HttpServletRequest request){
 		String sql="select * from `Case` where Caudit=0";
+
+		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
+
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {

@@ -30,7 +30,6 @@ public class PatientId  extends ActionSupport{
 	public String execute(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
 		PatientIdDao pid=new PatientIdDao();
-		System.out.println("过这里了吗");
 		ap=pid.getPatientName();
 		if(type.equals("case")) {
 			return SUCCESS;

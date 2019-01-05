@@ -1,9 +1,6 @@
 package com.action;
 
 import java.util.ArrayList;
-
-import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.ServletActionContext;
 
 import com.bean.CaseBean;
@@ -36,12 +33,11 @@ public class Case  extends ActionSupport{
 	ArrayList<CaseBean> acb=new ArrayList<CaseBean>();
 	@SuppressWarnings("unused")
 	public String execute(){
-		HttpSession session=ServletActionContext.getRequest().getSession();
 		CaseDao cd=new CaseDao();
 		if(grade.equals("3")) {
-			acb=cd.getCase(name);
+			acb=cd.getCase(name,ServletActionContext.getRequest());
 		}else {
-			acb=cd.getCase();
+			acb=cd.getCase(ServletActionContext.getRequest());
 		}
 		return SUCCESS;
 	}

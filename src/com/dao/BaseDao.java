@@ -13,12 +13,18 @@ public class BaseDao {
         ls = new LinkSql();
     }
 
-    public int getPageNum(String tableName, String searchColumn, String searchWords) {
+    public int getPageNum(String sql2, String searchColumn, String searchWords) {
         try {
-            StringBuffer sql = new StringBuffer("select count(1) from ");
-            sql.append(tableName);
+            StringBuffer sql = new StringBuffer(sql2.replace("*", "count(1)"));
+
             if (searchWords != null && !"".equals(searchWords)) {
-                sql.append(" where ").append(searchColumn).append(" like '%").append(searchWords).append("%'");
+                if (sql.indexOf("where") == -1) {
+                    sql.append(" where ");
+                } else {
+                    sql.append(" and ");
+                }
+
+                sql.append(searchColumn).append(" like '%").append(searchWords).append("%'");
             }
             rs = ls.selectSqlDate(sql.toString());
             rs.next();

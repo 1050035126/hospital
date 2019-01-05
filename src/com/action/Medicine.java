@@ -40,10 +40,10 @@ public class Medicine extends ActionSupport {
 		MedicineDao mcd=new MedicineDao();
 		if(grade.equals("3")) {
 			System.out.print("病人的在执行"+grade);
-			amb=mcd.getMedicine(name);
+			amb=mcd.getMedicine(name,ServletActionContext.getRequest());
 		}else {
 			System.out.print("医生的在执行"+grade);
-			amb=mcd.getMedicine();
+			amb=mcd.getMedicine(ServletActionContext.getRequest());
 		}
 		return SUCCESS;
 	}

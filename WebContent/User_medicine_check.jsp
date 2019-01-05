@@ -26,11 +26,11 @@
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="MedicineCheck.action" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
         </div>
         <div class="x-body">
-          <form class="layui-form x-center" action="" style="width:500px">
+          <form class="layui-form x-center" action="MedicineCheck.action" style="width:500px">
                 <div class="layui-form-pane" style="margin-top: 15px;">
                   <div class="layui-form-item">
                     <div class="layui-input-inline" style="width:400px">
-                      <input type="text" name="username"  placeholder="搜索内容" autocomplete="off" class="layui-input">
+                      <input type="text" name="searchWords" value="${searchWords}"  placeholder="搜索内容" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -39,7 +39,7 @@
                 </div> 
             </form>
             <xblock>
-            
+                <span class="x-right" style="line-height:25px">共有数据：${count}条</span>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -89,7 +89,7 @@
 			                    <label for="L_repass" class="layui-form-label">
 			                    </label>
 			                    <form action="Check.action?type=medicine&id=${id}" method="post">
-			                    <button  type="submit" class="layui-btn" lay-filter="add" lay-submit="">
+			                    <button  type="submit" onclick="return confirm('确定审核通过？')" class="layui-btn" lay-filter="add" lay-submit="">
 			                        审核
 			                    </button>
 			                    </form>
@@ -100,7 +100,16 @@
                 </tbody>
             </table>
 
-            <div id="page"></div>
+                <div
+                        <s:if test="#request.lastPage==1">style="display: none" </s:if>     >
+                    <a href="MedicineCheck.action?currentPage=${currentPage-1}&searchWords=${searchWords}">
+                        <button class="layui-btn">上一页</button>
+                    </a>
+                    <a href="MedicineCheck.action?currentPage=${currentPage+1}&searchWords=${searchWords}">
+                        <button class="layui-btn">下一页</button>
+                    </a>
+
+                </div>
         </div>
         <br /><br /><br />
         <script src="./lib/layui/layui.js" charset="utf-8"></script>

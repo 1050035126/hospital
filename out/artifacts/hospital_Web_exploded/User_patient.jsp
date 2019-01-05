@@ -42,7 +42,7 @@
             </form>
             <xblock>
             <button class="layui-btn" onclick="user_management_add('添加用户','user_patient_add.jsp','600','500')"><i class="layui-icon">&#xe608;</i>添加</button>
-            <span class="x-right" style="line-height:25px"></span></xblock>
+            <span class="x-right" style="line-height:25px">共有数据：${count}条</span></xblock>
             <table class="layui-table">
                 <thead>
                     <tr>
@@ -123,7 +123,7 @@
                             href="javascript:;" title="修改密码">
                                 <i class="layui-icon">&#xe631;</i>
                             </a>
-                            <a title="删除" href="DeletePatient.action?id=${id}"  onclick="member_del(this,'1')" 
+                            <a title="删除"    onclick="member_del(this,'${id}')"
                             style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
@@ -134,7 +134,7 @@
                 </tbody>
             </table>
 
-            <div >
+            <div <s:if test="#request.lastPage==1">style="display: none" </s:if>      >
                 <a href="UserPatient.action?currentPage=${currentPage-1}&searchWords=${searchWords}"><button class="layui-btn" >上一页</button> </a>
                 <a href="UserPatient.action?currentPage=${currentPage+1}&searchWords=${searchWords}"><button class="layui-btn">下一页</button></a>
 
@@ -232,6 +232,13 @@
             function member_del(obj,id){
                 layer.confirm('确认要删除吗？',function(index){
                     //发异步删除数据
+                    $.post("DeletePatient.action",
+                        {
+                            "id": id,
+                        },
+                        function (data, status) {
+                        }
+                    );
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!',{icon:1,time:1000});
                 });

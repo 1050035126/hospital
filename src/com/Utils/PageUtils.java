@@ -31,10 +31,7 @@ public class PageUtils {
             currentPage = 1;
         }
 
-        int count = new BaseDao().getPageNum(tableName, searchColumn, searchWords);
-        if (pageSize == 0) {
-            pageSize = 5;
-        }
+        int count = new BaseDao().getPageNum(sql, searchColumn, searchWords);
 
         int lastPage = (int) Math.ceil(count / Double.valueOf(pageSize));
         if (lastPage == 0) {
@@ -63,6 +60,8 @@ public class PageUtils {
 
         request.setAttribute("currentPage", currentPage);
         request.setAttribute("searchWords", searchWords);
+        request.setAttribute("count", count);
+        request.setAttribute("lastPage", lastPage);
         return str.toString();
     }
 

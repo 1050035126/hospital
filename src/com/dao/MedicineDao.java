@@ -4,8 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.Utils.PageUtils;
 import com.bean.MedicineBean;
 import com.db.LinkSql;
+
+import javax.servlet.http.HttpServletRequest;
 
 public class MedicineDao {
 	private LinkSql ls=null;
@@ -15,9 +18,11 @@ public class MedicineDao {
 		ls=new LinkSql();
 		amb=new ArrayList<MedicineBean>();
 	}
-	public ArrayList<MedicineBean> getMedicine(String name){
+	public ArrayList<MedicineBean> getMedicine(String name,HttpServletRequest request){
 		String sql=String.format("select * from Medicine where Maudit=1 and Dpatient='%s'", name);
-		System.out.println(sql);
+		sql = PageUtils.getPageSql(sql, "Medicine", "Mname", request);
+
+
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
@@ -37,9 +42,11 @@ public class MedicineDao {
 		}
 		return amb;
 	}
-	public ArrayList<MedicineBean> getMedicine(){
+	public ArrayList<MedicineBean> getMedicine(HttpServletRequest request){
 		String sql="select * from Medicine where Maudit=1";
-		System.out.println("这里是药品的");
+
+		sql = PageUtils.getPageSql(sql, "Medicine", "Mname", request);
+
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
@@ -60,8 +67,10 @@ public class MedicineDao {
 		}
 		return amb;
 	}
-	public ArrayList<MedicineBean> getMedicineCheck(){
+	public ArrayList<MedicineBean> getMedicineCheck(HttpServletRequest request){
 		String sql="select * from Medicine where Maudit=0";
+		sql = PageUtils.getPageSql(sql, "Medicine", "Mname", request);
+
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {

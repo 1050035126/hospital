@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.bean.MedicineBean;
 import com.dao.MedicineDao;
 import com.opensymphony.xwork2.ActionSupport;
+import org.apache.struts2.ServletActionContext;
 
 @SuppressWarnings("serial")
 public class MedicineCheck extends ActionSupport {
@@ -17,7 +18,7 @@ public class MedicineCheck extends ActionSupport {
 	}
 	public String execute(){
 		MedicineDao mcd=new MedicineDao();
-		amb=mcd.getMedicineCheck();
+		amb=mcd.getMedicineCheck(ServletActionContext.getRequest());
 		return SUCCESS;
 	}
 }

@@ -34,7 +34,7 @@
                 
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
-                        <span class="x-red">*</span>病历</label>
+                        <span class="x-red">*</span>药品名称</label>
                     <div class="layui-input-inline">
                         <input type="text" value="<%=text%>" style="height:100px;" name="text" class="layui-input">
                     </div>

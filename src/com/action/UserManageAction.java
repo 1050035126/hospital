@@ -23,7 +23,7 @@ public class UserManageAction extends ActionSupport{
 	@SuppressWarnings("unused")
 	public String execute(){
 		HttpSession session=ServletActionContext.getRequest().getSession();
-		umb=um.getUserManage();
+		umb=um.getUserManage(ServletActionContext.getRequest());
 		for(int i=0;i<umb.size();i++) {
 			UserManageBean u=umb.get(i);
 			System.out.println(String.format("1->%s\t2->%s\t3->%s\t4->%s\t5->%s", 
