@@ -90,9 +90,9 @@
                     </label>
                     <div class="layui-input-inline">
 	                    <select id="username" name="cure"  class="layui-input">
-	                    		<option value="1">普通治疗</option>
-	                        	<option value="2">住院治疗</option>
-	                        	<option value="3">手术治疗</option>
+	                    		<option value="普通治疗">普通治疗</option>
+	                        	<option value="住院治疗">住院治疗</option>
+	                        	<option value="手术治疗">手术治疗</option>
 	                    </select>
                     </div>
                 </div>
@@ -102,10 +102,9 @@
                     </label>
                     <div class="layui-input-inline">
 	                    <select id="username" name="nurse"  class="layui-input">
-	                    		<option value="0">无</option>
-	                        	<option value="1">一级护士</option>
-	                        	<option value="2">二级护士</option>
-	                        	<option value="3">三级护士</option>
+	                        	<option value="一级护士">一级护士</option>
+	                        	<option value="二级护士">二级护士</option>
+	                        	<option value="三级护士">三级护士</option>
 	                    </select>
                     </div>
                 </div>

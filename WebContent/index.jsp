@@ -85,7 +85,7 @@
                         </li>
                         <!--角色管理-->
                         <li class="layui-nav-item">
-                            <a class="javascript:;" href="javascript:;" _href="UserPatient.action">
+                            <a class="javascript:;" href="javascript:;" _href="UserPatient.action?">
                                 <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite>病人管理</cite>
                             </a>
                         </li>

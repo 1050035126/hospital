@@ -28,11 +28,11 @@
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="UserPatient.action" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
         </div>
         <div class="x-body">
-          <form class="layui-form x-center" action="" style="width:500px">
+          <form class="layui-form x-center" action="UserPatient.action" style="width:500px">
                 <div class="layui-form-pane" style="margin-top: 15px;">
                   <div class="layui-form-item">
                     <div class="layui-input-inline" style="width:400px">
-                      <input type="text" name="username"  placeholder="搜索内容" autocomplete="off" class="layui-input">
+                      <input type="text" name="searchWords" value="${searchWords}"  placeholder="搜索内容" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -105,18 +105,10 @@
                             ${email}
                         </td>
                         <td >
-                           <!--   ${cure}-->
-                            <s:if test="#list.cure==1">普通治疗</s:if> 
-                            <s:elseif test="#list.cure==2">住院治疗</s:elseif>
-							<s:else>手术治疗</s:else>
+                            ${cure}
                         </td>
                         <td>
-                        	<!--  ${nurse} -->
-                        	<s:if test="#list.nurse==0">无</s:if> 
-                            <s:elseif test="#list.cure==1">一级护士</s:elseif>
-                            <s:elseif test="#list.cure==2">二级护士</s:elseif>
-                            <s:elseif test="#list.cure==3">三级护士</s:elseif>
-							<s:else>手术治疗</s:else>
+                        	 ${nurse}
                         </td>
                          <td>
                         	${doctor}
@@ -142,7 +134,11 @@
                 </tbody>
             </table>
 
-            <div id="page"></div>
+            <div >
+                <a href="UserPatient.action?currentPage=${currentPage-1}&searchWords=${searchWords}"><button class="layui-btn" >上一页</button> </a>
+                <a href="UserPatient.action?currentPage=${currentPage+1}&searchWords=${searchWords}"><button class="layui-btn">下一页</button></a>
+
+            </div>
         </div>
         <br /><br /><br />
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
