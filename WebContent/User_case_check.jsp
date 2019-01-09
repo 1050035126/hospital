@@ -63,8 +63,8 @@
                 <th>
                     病历
                 </th>
-                <th>
-                    操作
+                <th >
+                    审核
                 </th>
             </tr>
             </thead>
@@ -85,18 +85,19 @@
                             ${time}</td>
                     <td>
                         <u style="cursor:pointer"
-                           onclick="user_management_show('${name}','user_case_show.jsp?id=${id}&doctor=${doctor}&patient=${patient}&time=${time}&text=${text}','10001','360','400')">点击此处查看病历</u>
+                           onclick="user_management_show('${name}','user_case_show.jsp?id=${id}&doctor=${doctor}&patient=${patient}&time=${time}&text=${text}&audit=${audit}','10001','360','400')">点击此处查看病历</u>
                     </td>
                     <td>
-                        <div class="layui-form-item" style="width:60px;height:20px;margin-top:-25px;">
-                            <label for="L_repass" class="layui-form-label">
-                            </label>
-                            <form action="Check.action?type=case&id=${id}" method="post">
-                                <button type="submit" onclick="return confirm('确定审核通过？')" class="layui-btn" lay-filter="add" lay-submit="">
-                                    审核
+                            <form action="Check.action?type=case&id=${id}&audit=1" method="post" style="float: left" >
+                                <button type="submit" onclick="return confirm('确定通过审核？')" class="layui-btn" lay-filter="add" lay-submit="">
+                                    通过
                                 </button>
                             </form>
-                        </div>
+                            <form action="Check.action?type=case&id=${id}&audit=-1" method="post">
+                                <button type="submit" onclick="return confirm('确定不通过审核？')"   class="layui-btn layui-btn-danger" lay-filter="add" lay-submit="">
+                                    不通过
+                                </button>
+                            </form>
                     </td>
                 </tr>
             </s:iterator>
@@ -122,19 +123,10 @@
         $ = layui.jquery;//jquery
         laydate = layui.laydate;//日期插件
         lement = layui.element();//面包导航
-        laypage = layui.laypage;//分页
         layer = layui.layer;//弹出层
 
         //以上模块根据需要引入
 
-        laypage({
-            cont: 'page'
-            , pages: 100
-            , first: 1
-            , last: 100
-            , prev: '<em><</em>'
-            , next: '<em>></em>'
-        });
 
         var start = {
             min: laydate.now()

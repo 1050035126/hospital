@@ -17,6 +17,13 @@ public class CaseDao {
 		ls=new LinkSql();
 		acb=new ArrayList<CaseBean>();
 	}
+
+	/**
+	 * 病人查看病历
+	 * @param name
+	 * @param request
+	 * @return
+	 */
 	public ArrayList<CaseBean> getCase(String name,HttpServletRequest request){
 		String sql=String.format("select * from `Case` where Caudit=1 and Cpatient='%s'", name);
 		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
@@ -38,8 +45,14 @@ public class CaseDao {
 		}
 		return acb;
 	}
+
+	/**
+	 * 实习医生查看病历
+	 * @param request
+	 * @return
+	 */
 	public ArrayList<CaseBean> getCase(HttpServletRequest request){
-		String sql="select * from `Case` where Caudit=1";
+		String sql="select * from `Case`";
 
 		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
 
@@ -61,7 +74,12 @@ public class CaseDao {
 		}
 		return acb;
 	}
-	
+
+	/**
+	 * 医生查看待审核病历
+	 * @param request
+	 * @return
+	 */
 	public ArrayList<CaseBean> getCaseCheck(HttpServletRequest request){
 		String sql="select * from `Case` where Caudit=0";
 

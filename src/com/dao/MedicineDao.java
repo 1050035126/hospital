@@ -26,7 +26,6 @@ public class MedicineDao {
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
-				System.out.println("这里应该出来点啥");
 				MedicineBean mb=new MedicineBean();
 				mb.setId(rs.getString("Mid"));
 				mb.setName(rs.getString("Mname"));
@@ -50,7 +49,6 @@ public class MedicineDao {
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
-				System.out.println("这里应该出来点啥");
 				MedicineBean mb=new MedicineBean();
 				mb.setId(rs.getString("Mid"));
 				mb.setName(rs.getString("Mname"));

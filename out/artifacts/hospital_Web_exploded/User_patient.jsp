@@ -148,20 +148,11 @@
                 $ = layui.jquery;//jquery
               laydate = layui.laydate;//日期插件
               lement = layui.element();//面包导航
-              laypage = layui.laypage;//分页
               layer = layui.layer;//弹出层
 
               //以上模块根据需要引入
 
-              laypage({
-                cont: 'page'
-                ,pages: 100
-                ,first: 1
-                ,last: 100
-                ,prev: '<em><</em>'
-                ,next: '<em>></em>'
-              }); 
-              
+
               var start = {
                 min: laydate.now()
                 ,max: '2099-06-16 23:59:59'

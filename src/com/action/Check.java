@@ -19,17 +19,28 @@ public class Check extends ActionSupport {
 	}
 	private String type;
 	private String id;
+	private String audit;
+
 	public String execute(){
 		CheckDao cd=new CheckDao();
 		System.out.println("id="+id+"\ttype="+type);
 		if(type.equals("case")) {
-			cd.check("case", id);
+			cd.check("case", id,audit);
 			return SUCCESS;
 		}else if(type.equals("medicine")){
-			cd.check("medicine", id);
+			cd.check("medicine", id,audit);
 			return INPUT;
 		}else {
 			return INPUT;
 		}
+	}
+
+
+	public String getAudit() {
+		return audit;
+	}
+
+	public void setAudit(String audit) {
+		this.audit = audit;
 	}
 }

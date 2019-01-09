@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,6 +77,9 @@
             <th>
                 病历
             </th>
+            <th>
+                审核状态
+            </th>
             <% if (grade.equals("1")) { %>
             <th>
                 操作
@@ -100,8 +104,23 @@
                         ${time}</td>
                 <td>
                     <u style="cursor:pointer"
-                       onclick="user_management_show('${name}','user_case_show.jsp?id=${id}&doctor=${doctor}&patient=${patient}&time=${time}&text=${text}','10001','360','400')">点击此处查看病历</u>
+                       onclick="user_management_show('${name}','user_case_show.jsp?id=${id}&doctor=${doctor}&patient=${patient}&time=${time}&text=${text}&audit=${audit}','10001','360','400')">点击此处查看病历</u>
                 </td>
+
+                <td>
+                    <c:choose>
+                        <c:when test="${audit=='1'}">
+                            审核通过
+                        </c:when>
+                        <c:when test="${audit=='0'}">
+                            待审核
+                        </c:when>
+                        <c:otherwise>
+                            审核未通过
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+
                 <% if (grade.equals("1")) { %>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;"
@@ -109,7 +128,7 @@
                        class="ml-5" style="text-decoration:none">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
-                    <a title="删除"  onclick="return member_del(this,'${id}')"
+                    <a title="删除" onclick="return member_del(this,'${id}')"
                        style="text-decoration:none">
                         <i class="layui-icon">&#xe640;</i>
                     </a>
@@ -139,19 +158,10 @@
         $ = layui.jquery;//jquery
         laydate = layui.laydate;//日期插件
         lement = layui.element();//面包导航
-        laypage = layui.laypage;//分页
         layer = layui.layer;//弹出层
 
         //以上模块根据需要引入
 
-        laypage({
-            cont: 'page'
-            , pages: 100
-            , first: 1
-            , last: 100
-            , prev: '<em><</em>'
-            , next: '<em>></em>'
-        });
 
         var start = {
             min: laydate.now()
