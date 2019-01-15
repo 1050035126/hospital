@@ -31,10 +31,8 @@
 %>
 <div class="x-body">
     <form class="layui-form" action="ChangeMass.action?id=<%=id%>&grade=<%=grade%>" method="post">
-        <label for="L_email" class="layui-form-label">
-            <span class="x-red">*</span>用户名称(工号)</label>
         <div class="layui-input-inline">
-            <input type="text" id="L_username" disabled="" value="<%=id%>" class="layui-input">
+            <input name="id" style="display: none" type="text"  disabled="" value="<%=id%>" class="layui-input">
         </div>
         <label for="L_email" class="layui-form-label">
             <span class="x-red">*</span>角色</label>

@@ -39,11 +39,13 @@
         <div class="layui-form-pane" style="margin-top: 15px;">
             <div class="layui-form-item">
                 <div class="layui-input-inline" style="width:400px">
-                    <input type="text" name="searchWords" value="${searchWords}" placeholder="搜索内容" autocomplete="off"
+                    <input type="text" name="searchWords" value="${searchWords}"
+                           placeholder="搜索病人名称" autocomplete="off"
                            class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width:80px">
-                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>
+                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i
+                            class="layui-icon">&#xe615;</i>
                     </button>
                 </div>
             </div>
@@ -51,8 +53,13 @@
     </form>
     <xblock>
         <% if (!grade.equals("3")) { %>
-        <button class="layui-btn" onclick="user_management_add('添加病例','PatientId.action?type=case','600','500')"><i
+        <button class="layui-btn"
+                onclick="user_management_add('添加病例','PatientId.action?type=case','600','500')"><i
                 class="layui-icon">&#xe608;</i>添加
+        </button>
+
+        <button id="toChangeCaseListButton" onclick="toChangeCaseList()" class="layui-btn">
+            查看待更新病历
         </button>
         <%} %>
         <span class="x-right" style="line-height:25px">共有数据：${count}条</span></xblock>
@@ -104,7 +111,7 @@
                         ${time}</td>
                 <td>
                     <u style="cursor:pointer"
-                       onclick="user_management_show('${name}','user_case_show.jsp?id=${id}&doctor=${doctor}&patient=${patient}&time=${time}&text=${text}&audit=${audit}','10001','360','400')">点击此处查看病历</u>
+                       onclick="user_management_show('${patient}','GetCase.action?id=${id}&returnTo=show','4','900','500')">点击此处查看病历</u>
                 </td>
 
                 <td>
@@ -124,7 +131,7 @@
                 <% if (grade.equals("1")) { %>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;"
-                       onclick="user_management_edit('编辑','user_case_edit.jsp?id=${id}&text=${text}&doctor=<%=name%>','4','','510')"
+                       onclick="user_management_edit('编辑','GetCase.action?id=${id}&returnTo=edit','4','900','500')"
                        class="ml-5" style="text-decoration:none">
                         <i class="layui-icon">&#xe642;</i>
                     </a>
@@ -141,18 +148,42 @@
 
     <div
             <s:if test="#request.lastPage==1">style="display: none" </s:if>     >
-        <a href="Case.action?currentPage=${currentPage-1}&searchWords=${searchWords}&grade=<%=grade%>&name=<%=name%>">
+        <a href="Case.action?currentPage=${currentPage-1}&searchWords=${searchWords}&grade=<%=grade%>&name=<%=name%>&waitToUpdate=${waitToUpdate}">
             <button class="layui-btn">上一页</button>
         </a>
-        <a href="Case.action?currentPage=${currentPage+1}&searchWords=${searchWords}&grade=<%=grade%>&name=<%=name%>">
+        <a href="Case.action?currentPage=${currentPage+1}&searchWords=${searchWords}&grade=<%=grade%>&name=<%=name%>&waitToUpdate=${waitToUpdate}">
             <button class="layui-btn">下一页</button>
         </a>
 
     </div>
 </div>
 <br/><br/><br/>
+<script src="./js/jquery-1.8.3.min.js" charset="utf-8">
+</script>
 <script src="./lib/layui/layui.js" charset="utf-8"></script>
 <script src="./js/x-layui.js" charset="utf-8"></script>
+
+<script>
+    $(document).ready(function () {
+
+        var waitToUpdate = ${waitToUpdate};
+        var url = '';
+        if (waitToUpdate == 0) {
+            $("#toChangeCaseListButton").text("查看待更新病历");
+            url="Case.action?waitToUpdate=1"
+        } else {
+            $("#toChangeCaseListButton").text("查看所有病历");
+            url="Case.action?waitToUpdate=0"
+        }
+
+
+        toChangeCaseList = function () {
+            window.location.href = url;
+        }
+
+
+    });
+</script>
 <script>
     layui.use(['laydate', 'element', 'laypage', 'layer'], function () {
         $ = layui.jquery;//jquery
@@ -183,6 +214,7 @@
         };
 
     });
+
 
     //批量删除提交
     function delAll() {

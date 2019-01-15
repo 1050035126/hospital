@@ -32,7 +32,7 @@
                 <div class="layui-form-pane" style="margin-top: 15px;">
                   <div class="layui-form-item">
                     <div class="layui-input-inline" style="width:400px">
-                      <input type="text" name="searchWords" value="${searchWords}"  placeholder="搜索内容" autocomplete="off" class="layui-input">
+                      <input type="text" name="searchWords" value="${searchWords}"  placeholder="搜索病人名称" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-input-inline" style="width:80px">
                         <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>

@@ -31,7 +31,7 @@
         <div class="layui-form-pane" style="margin-top: 15px;">
             <div class="layui-form-item">
                 <div class="layui-input-inline" style="width:400px">
-                    <input type="text" name="searchWords" value="${searchWords}" placeholder="搜索内容" autocomplete="off"
+                    <input type="text" name="searchWords" value="${searchWords}" placeholder="搜索病人名称" autocomplete="off"
                            class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width:80px">
@@ -85,7 +85,7 @@
                             ${time}</td>
                     <td>
                         <u style="cursor:pointer"
-                           onclick="user_management_show('${name}','user_case_show.jsp?id=${id}&doctor=${doctor}&patient=${patient}&time=${time}&text=${text}&audit=${audit}','10001','360','400')">点击此处查看病历</u>
+                           onclick="user_management_show('${patient}','GetCase.action?id=${id}&returnTo=show','4','900','500')">点击此处查看病历</u>
                     </td>
                     <td>
                             <form action="Check.action?type=case&id=${id}&audit=1" method="post" style="float: left" >

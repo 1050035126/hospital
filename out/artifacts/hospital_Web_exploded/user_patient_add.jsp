@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html>
-    
+
     <head>
         <meta charset="utf-8">
         <title>
@@ -17,20 +17,10 @@
         <meta name="format-detection" content="telephone=no">
         <link rel="stylesheet" href="./css/x-admin.css" media="all">
     </head>
-    
+
     <body>
         <div class="x-body">
             <form class="layui-form" action="Register.action?limit=3&hdoctor=<%=request.getSession().getAttribute("username")%>"  method="post">
-                <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
-                        <span class="x-red">*</span>用户名称(工号)</label>
-                    <div class="layui-input-inline">
-                        <input type="text"  name="id" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>必填
-                    </div>
-                </div>
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>姓名</label>
@@ -41,7 +31,7 @@
                         <span class="x-red">*</span>必填
                     </div>
                 </div>
-                
+
                 <div class="layui-form-item">
                     <label for="L_pass" class="layui-form-label">
                         <span class="x-red">*</span>密码
@@ -61,18 +51,8 @@
                         <input type="password" id="L_repass" name="repass" required lay-verify="repass"
                         autocomplete="off" class="layui-input">
                     </div>
-                </div> 
-      -->
-      			<div class="layui-form-item">
-                    <label for="L_username" class="layui-form-label">
-                        <span class="x-red">*</span>性别
-                    </label>
-                    <div class="layui-input-inline">
-	                    <select id="username" name="subject"  class="layui-input">
-	                        	<option value="外科">外科</option>
-	                    </select>
-                    </div>
                 </div>
+      -->
                 <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>性别
@@ -108,7 +88,7 @@
 	                    </select>
                     </div>
                 </div>
-                
+
                  <div class="layui-form-item">
                     <label for="L_username" class="layui-form-label">
                         <span class="x-red">*</span>年龄</label>
@@ -148,7 +128,7 @@
                 $ = layui.jquery;
               var form = layui.form()
               ,layer = layui.layer;
-            
+
               //自定义验证规则
               form.verify({
                 nikename: function(value){
@@ -176,15 +156,15 @@
      //           });
      //           return false;
      //         });
-              
-              
+
+
             });
         </script>
         <script>
         var _hmt = _hmt || [];
         (function() {
           var hm = document.createElement("script");
-          var s = document.getElementsByTagName("script")[0]; 
+          var s = document.getElementsByTagName("script")[0];
           s.parentNode.insertBefore(hm, s);
         })();
         </script>

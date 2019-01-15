@@ -27,7 +27,12 @@ public class LinkSql {
             e.printStackTrace();  
         }  
 	}
-	
+
+
+	public Connection getConn() {
+		return conn;
+	}
+
 	public void changeMySqlDate(String sql) {
 		try {
 			System.out.println("接受到的Sql语句（插入删除类的）："+sql);

@@ -55,7 +55,7 @@ public class PageUtils {
             str.append(" and ");
         }
         str.append(searchColumn).append(" like '%").append(searchWords);
-        str.append("%' limit ").append(begin).append(",").append(end);
+        str.append("%' limit ").append(begin).append(",").append(pageSize);
 
 
         request.setAttribute("currentPage", currentPage);

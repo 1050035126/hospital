@@ -19,6 +19,30 @@ public class CaseDao {
 	}
 
 	/**
+	 * 根据id查询病历
+	 * @param id
+	 * @return
+	 */
+	public CaseBean getCaseById(String id){
+		String sql=String.format("select * from `Case` where Cid= %s ", id);
+		rs=ls.selectSqlDate(sql);
+		CaseBean cb=new CaseBean();
+		try {
+			while(rs.next()) {
+				cb.setId(rs.getString("Cid"));
+				cb.setText(rs.getString("Ccase"));
+				cb.setPatient(rs.getString("Cpatient"));
+				cb.setTime(rs.getString("Ctime"));
+				cb.setDoctor(rs.getString("Cdoctor"));
+				cb.setAudit(rs.getString("Caudit"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cb;
+	}
+
+	/**
 	 * 病人查看病历
 	 * @param name
 	 * @param request
@@ -26,7 +50,7 @@ public class CaseDao {
 	 */
 	public ArrayList<CaseBean> getCase(String name,HttpServletRequest request){
 		String sql=String.format("select * from `Case` where Caudit=1 and Cpatient='%s'", name);
-		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
+		sql = PageUtils.getPageSql(sql, "Case", "Cpatient", request);
 		rs=ls.selectSqlDate(sql);
 		try {
 			while(rs.next()) {
@@ -51,10 +75,15 @@ public class CaseDao {
 	 * @param request
 	 * @return
 	 */
-	public ArrayList<CaseBean> getCase(HttpServletRequest request){
+	public ArrayList<CaseBean> getCase(int waitToUpdate,HttpServletRequest request){
+		request.setAttribute("waitToUpdate", waitToUpdate);
+
 		String sql="select * from `Case`";
 
-		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
+		if (waitToUpdate==1){
+			sql="select * from `case` c where c.Cpatient in(SELECT p.Pname from patient p where p.Pcure in('手术治疗','入院治疗')) ";
+		}
+		sql = PageUtils.getPageSql(sql, "Case", "Cpatient", request);
 
 		rs=ls.selectSqlDate(sql);
 		try {
@@ -83,7 +112,7 @@ public class CaseDao {
 	public ArrayList<CaseBean> getCaseCheck(HttpServletRequest request){
 		String sql="select * from `Case` where Caudit=0";
 
-		sql = PageUtils.getPageSql(sql, "Case", "Ccase", request);
+		sql = PageUtils.getPageSql(sql, "Case", "Cpatient", request);
 
 		rs=ls.selectSqlDate(sql);
 		try {

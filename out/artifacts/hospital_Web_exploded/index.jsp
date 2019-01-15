@@ -89,6 +89,13 @@
                                 <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite>病人管理</cite>
                             </a>
                         </li>
+
+                        <!--药品管理-->
+                        <li class="layui-nav-item">
+                            <a class="javascript:;" href="javascript:;" _href="Medicine.action?grade=<%=grade%>&name=<%=request.getSession().getAttribute("username") %>">
+                                <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite><%if(!grade.equals("3")){out.print("药品管理");}else{out.print("查看药品");} %></cite>
+                            </a>
+                        </li>
                          <%}%>
                          <!--病例管理-->
                         <li class="layui-nav-item">
@@ -96,12 +103,7 @@
                                 <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite><%if(!grade.equals("3")){out.print("病历管理");}else{out.print("查看病历");} %></cite>
                             </a>
                         </li>
-                        <!--病例管理-->
-                        <li class="layui-nav-item">
-                            <a class="javascript:;" href="javascript:;" _href="Medicine.action?grade=<%=grade%>&name=<%=request.getSession().getAttribute("username") %>">
-                                <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite><%if(!grade.equals("3")){out.print("药品管理");}else{out.print("查看药品");} %></cite>
-                            </a>
-                        </li>
+
                        
                         <!--友情链接-->
                         <li class="layui-nav-item">

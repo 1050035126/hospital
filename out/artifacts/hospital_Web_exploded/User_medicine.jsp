@@ -37,7 +37,7 @@
         <div class="layui-form-pane" style="margin-top: 15px;">
             <div class="layui-form-item">
                 <div class="layui-input-inline" style="width:400px">
-                    <input type="text" name="searchWords" value="${searchWords}" placeholder="搜索内容" autocomplete="off" class="layui-input">
+                    <input type="text" name="searchWords" value="${searchWords}" placeholder="搜索药品名称" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-input-inline" style="width:80px">
                     <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i>
@@ -66,12 +66,6 @@
                 药品名称
             </th>
             <th>
-                使用者
-            </th>
-            <th>
-                开药者
-            </th>
-            <th>
                 药品类型
             </th>
             <th>
@@ -86,7 +80,6 @@
         </thead>
         <tbody>
         <s:iterator id="list" value="amb">
-
             <tr>
                 <td>
                     <input type="checkbox" value="1p" name="">
@@ -95,12 +88,6 @@
                         ${id}
                 </td>
                 <td>${name}</td>
-                <td>
-                        ${patient}
-                </td>
-                <td>
-                        ${doctor}
-                </td>
                 <td>
                     <!--   ${manage} -->
                     <s:if test="#list.manage==1">管制类药品</s:if>

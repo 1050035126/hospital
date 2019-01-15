@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <!DOCTYPE html>
-<html>s
-
+<html>
 <head>
     <meta charset="utf-8">
     <title>
@@ -18,15 +18,7 @@
 </head>
 
 <body>
-<%
-    String id = request.getParameter("id");
-    String doctor = request.getParameter("doctor");
-    String patient = request.getParameter("patient");
-    String time = request.getParameter("time");
-    String text = request.getParameter("text");
-%>
 <div class="x-body">
-
     <blockquote class="layui-elem-quote">
         <img src="images/0.jpg" class="layui-circle" style="width:50px;float:left">
         <dl style="margin-left:80px; color:#019688">
@@ -39,40 +31,74 @@
             <tbody>
             <tr>
                 <th width="80">ID</th>
-                <td><%=id%>
+                <td>${caseBean.id}
                 </td>
             </tr>
             <tr>
                 <th width="80">病人</th>
-                <td><%=patient%>
+                <td>${caseBean.patient}
                 </td>
             </tr>
             <tr>
                 <th width="80">主治医生</th>
-                <td><%=doctor%>
+                <td>${caseBean.doctor}
                 </td>
             </tr>
             <tr>
                 <th width="80">时间</th>
-                <td><%=time%>
+                <td>${caseBean.time}
                 </td>
             </tr>
             <tr>
                 <th width="80">病历</th>
-                <td><%=text%>
+                <td>
+                    <textarea disabled id="caseText" style="height:300px;width: 700px">
+                        ${caseBean.text}
+
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <th width="80">药物</th>
+                <td>
+                    <table>
+                        <tr>
+                            <th>药物</th>
+                            <th>数量</th>
+                            <th>审核状态</th>
+                        </tr>
+                        <c:forEach var="item" items="${caseMedicineList}">
+                            <c:if test="${grade==3&&item.audit==1}">
+                                <tr>
+                                    <td>${item.medicineName}</td>
+                                    <td>${item.quantity}</td>
+                                    <td>${item.audit eq "1"?"审核通过":""}
+                                            ${item.audit eq "0"?"待审核":""}
+                                            ${item.audit eq "-1"?"审核未通过":""}
+                                    </td>
+                                </tr>
+                            </c:if>
+                            <c:if test="${grade!=3}">
+                                <tr>
+                                    <td>${item.medicineName}</td>
+                                    <td>${item.quantity}</td>
+                                    <td>${item.audit eq "1"?"审核通过":""}
+                                            ${item.audit eq "0"?"待审核":""}
+                                            ${item.audit eq "-1"?"审核未通过":""}
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                    </table>
+
                 </td>
             </tr>
             <tr>
                 <th width="80">状态</th>
                 <td>
-                        <% String audit=request.getParameter("audit"); %>
-                        <% if ("1".equals(audit))  {   %>
-                        审核通过
-                        <%} else if ("0".equals(audit)){%>
-                        待审核
-                        <%}else{%>
-                        审核未通过
-                        <%}%>
+                    ${caseBean.audit eq "1"?"审核通过":""}
+                    ${caseBean.audit eq "0"?"待审核":""}
+                    ${caseBean.audit eq "-1"?"审核未通过":""}
                 </td>
             </tr>
             </tbody>

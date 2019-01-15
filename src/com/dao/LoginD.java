@@ -15,17 +15,17 @@ public class LoginD {
 	public boolean logined(String grade,String name,String pass) {
 		String sql="";
 		if(grade.equals("1")) {
-			sql=String.format("select * from Doctor where Did='%s' and Dpass='%s'", name,pass);
+			sql=String.format("select * from Doctor where Dname='%s' and Dpass='%s'", name,pass);
 		}else if(grade.equals("2")) {
-			sql=String.format("select * from Houseman where Hid='%s' and Hpass='%s'", name,pass);
+			sql=String.format("select * from Houseman where Hname='%s' and Hpass='%s'", name,pass);
 		}else if(grade.equals("3")) {
-			sql=String.format("select * from Patient where Pid='%s' and Ppass='%s'", name,pass);
+			sql=String.format("select * from Patient where Pname='%s' and Ppass='%s'", name,pass);
 		}
 		System.out.println(sql);
 		try {
 			rs=ls.selectSqlDate(sql);
 			if(rs.next()) {
-				name=rs.getString(getGrade(grade)+"name");
+				this.name=rs.getString(getGrade(grade)+"name");
 				limit=rs.getString("Limit");
 				return true;
 			}else {
@@ -51,6 +51,11 @@ public class LoginD {
 	public String getName() {
 		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getLimit() {
 		return limit;
 	}

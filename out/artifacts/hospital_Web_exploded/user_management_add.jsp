@@ -23,16 +23,6 @@
             <form class="layui-form" action="Register.action?hdoctor=<%=request.getSession().getAttribute("username")%>"  method="post">
                 <div class="layui-form-item">
                     <label for="L_email" class="layui-form-label">
-                        <span class="x-red">*</span>用户名称(工号)</label>
-                    <div class="layui-input-inline">
-                        <input type="text"  name="id" class="layui-input">
-                    </div>
-                    <div class="layui-form-mid layui-word-aux">
-                        <span class="x-red">*</span>必填
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="L_email" class="layui-form-label">
                         <span class="x-red">*</span>姓名</label>
                     <div class="layui-input-inline">
                         <input type="text"  name="name" class="layui-input">

@@ -23,6 +23,11 @@
             </result>
         </action>
 
+        <action name="CaseMedicineAction" class="com.action.CaseMedicineAction">
+            <result name="success" type="json">result
+            </result>
+        </action>
+
     </package>
 
 
@@ -46,6 +51,12 @@
         </action>
         <action name="Case" class="com.action.Case">
             <result name="success">/User_case.jsp</result>
+        </action>
+
+
+        <action name="GetCase" class="com.action.GetCase">
+            <result name="input">/user_case_show.jsp</result>
+            <result name="success">/user_case_edit.jsp</result>
         </action>
         <action name="CaseCheck" class="com.action.CaseCheck">
             <result name="success">/User_case_check.jsp</result>
