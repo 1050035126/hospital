@@ -96,7 +96,7 @@
                 <td>
                         ${time}
                 </td>
-                <% if (grade.equals("1")) { %>
+                <% if (grade.equals("1")||"4".equals(grade)) { %>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;"
                        onclick="user_management_edit('编辑','user_medicine_edit.jsp?id=${id}&text=${name}','4','','510')"

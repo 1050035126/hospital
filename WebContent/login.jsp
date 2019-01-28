@@ -6,7 +6,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>登录</title>
     <link rel="stylesheet" href="lib/layui/css/layui.css" media="all"/>
@@ -54,9 +55,10 @@
         <h1>欢迎登录</h1>
     </header>
     <div class="beg-login-main">
-        <form action="Login.action" class="layui-form" method="post"><input name="__RequestVerificationToken"
-                                                                            type="hidden"
-                                                                            value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81"/>
+        <form action="Login.action" class="layui-form" method="post"><input
+                name="__RequestVerificationToken"
+                type="hidden"
+                value="fkfh8D89BFqTdrE2iiSdG_L781RSRtdWOH411poVUWhxzA5MzI8es07g6KPYQh9Log-xf84pIR2RIAEkOokZL3Ee3UKmX0Jc8bW8jOdhqo81"/>
 
             <!---->
             <div class="layui-form-item">
@@ -67,6 +69,7 @@
                     <option value="1">医生</option>
                     <option value="2">实习医生</option>
                     <option value="3">病人</option>
+                    <option value="4">管理员</option>
                 </select>
             </div>
             <!---->
@@ -75,20 +78,23 @@
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe612;</i>
                 </label>
-                <input id="name" type="text" name="name" lay-verify="userName" autocomplete="off" placeholder="请输入登录名"
+                <input id="name" type="text" name="name" lay-verify="userName" autocomplete="off"
+                       placeholder="请输入登录名"
                        class="layui-input">
             </div>
             <div class="layui-form-item">
                 <label class="beg-login-icon">
                     <i class="layui-icon">&#xe642;</i>
                 </label>
-                <input id="password" type="password" name="pass" lay-verify="password" autocomplete="off"
+                <input id="password" type="password" name="pass" lay-verify="password"
+                       autocomplete="off"
                        placeholder="请输入密码" class="layui-input">
             </div>
             <div class="layui-form-item">
                 <div class="beg-pull-left beg-login-remember">
                     <label>记住帐号？</label>
-                    <input id="rememberMe" type="checkbox" name="rememberMe" value="true" lay-skin="switch" checked
+                    <input id="rememberMe" type="checkbox" name="rememberMe" value="true"
+                           lay-skin="switch" checked
                            title="记住帐号">
                 </div>
                 <div class="beg-pull-right">
@@ -96,9 +102,10 @@
                         <i class="layui-icon">&#xe650;</i> 登录
                     </button>
                 </div>
-                <div class="beg-clear"></div>
+
             </div>
         </form>
+        <div class="beg-clear" style="float: right"><a onclick="showRegisterFrame()">点击注册</a></div>
     </div>
 
 </div>
@@ -111,6 +118,51 @@
             form = layui.form();
 
     });
+
+    showRegisterFrame = function () {
+        var layerObject = layer.open({
+            title: "用户注册",
+            type: 2,
+            area: ['500px', '500px'],
+            fix: false, //不固定
+            maxmin: true,
+            shadeClose: true,
+            shade: 0.4,
+            content: "user_register.jsp"
+            , btn: ['确定', '取消'] //只是为了演示
+            , yes: function (index, layero) {
+                var body = layer.getChildFrame('body', index);
+                var iframeWin = window[layero.find('iframe')[0]['name']];//得到iframe页的窗口对象，执行iframe页的方法：
+
+                var name = iframeWin.document.getElementById("name").value;
+                var pass = iframeWin.document.getElementById("pass").value;
+                var age = iframeWin.document.getElementById("age").value;
+                var phone = iframeWin.document.getElementById("phone").value;
+                var email = iframeWin.document.getElementById("email").value;
+                var sex = iframeWin.document.getElementById("sex").value;
+
+                //TODO:ajax 注册用户信息
+                $.post("UserRegisterAction.action",{
+                    "name":name,
+                    "pass":pass,
+                    "age":age,
+                    "phone":phone,
+                    "email":email,
+                    "sex":sex
+                },function (result) {
+                    layer.closeAll();
+                    layer.msg('注册成功，请登录！');
+                })
+            }
+            , btn2: function () {
+                layer.closeAll();
+            }, success: function (layero) {
+
+            }
+        });
+    }
+
+
 </script>
 </body>
 

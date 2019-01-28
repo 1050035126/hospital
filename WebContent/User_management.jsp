@@ -23,7 +23,7 @@
 <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>用户管理</cite></a>
+              <a><cite>医生管理</cite></a>
             </span>
     <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
        href="UserManageAction.action" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
@@ -44,7 +44,7 @@
         </div>
     </form>
     <xblock>
-        <% if (grade.equals("1")) { %>
+        <% if (grade.equals("1")||"4".equals(grade)) { %>
         <button class="layui-btn" onclick="user_management_add('添加用户','user_management_add.jsp','600','500')"><i
                 class="layui-icon">&#xe608;</i>添加
         </button>
@@ -110,7 +110,7 @@
                 <td>
                         ${email}
                 </td>
-                <%if (grade.equals("1")) { %>
+                <%if (grade.equals("1")||"4".equals(grade)) { %>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;"
                        onclick="user_management_edit('编辑','user_management_edit.jsp?id=${id}&isDoctor=${isDoc}','4','','510')"

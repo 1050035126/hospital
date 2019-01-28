@@ -23,7 +23,7 @@
         <div class="x-nav">
             <span class="layui-breadcrumb">
               <a><cite>首页</cite></a>
-              <a><cite>角色管理</cite></a>
+              <a><cite>病人管理</cite></a>
             </span>
             <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="UserPatient.action" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
         </div>
@@ -113,7 +113,7 @@
                          <td>
                         	${doctor}
                         </td>
-                        <% if(grade.equals("1")){ %>
+                        <% if(grade.equals("1")||"4".equals(grade)){ %>
                         <td class="td-manage">
                             <a title="编辑" href="javascript:;" onclick="user_management_edit('编辑','PatientEdit.action?grade=3&id=${id}','4','','510')"
                             class="ml-5" style="text-decoration:none">

@@ -81,7 +81,7 @@ public class CaseDao {
 		String sql="select * from `Case`";
 
 		if (waitToUpdate==1){
-			sql="select * from `case` c where c.Cpatient in(SELECT p.Pname from patient p where p.Pcure in('手术治疗','入院治疗')) ";
+			sql="select * from `case` c where c.Cpatient in(SELECT p.Pname from patient p where p.Pcure in('手术治疗','住院治疗')) ";
 		}
 		sql = PageUtils.getPageSql(sql, "Case", "Cpatient", request);
 

@@ -69,7 +69,7 @@
                 <div style="float: left;margin-left: 30px">
                     选择药物：<select id="medicineName">
                     <c:forEach var="item" items="${medicineList}">
-                        <option value="${item.name}:${item.audit}">${item.name}</option>
+                        <option value="${item.name}:${item.audit}" >${item.name}${item.audit==0?"(需审核)":""}</option>
                     </c:forEach>
                 </select>
                     选择数量：<input id="medicineQuantity" class="layui-input"/>
@@ -115,6 +115,10 @@
         }
 
         toDeleteMedicine = function (id, trObject) {
+            if (!confirm("确定删除？")){
+                return
+            }
+
             $.post("CaseMedicineAction.action",
                 {
                     "id": id,
@@ -134,10 +138,14 @@
             var options = $("#medicineName option:selected");
             var medicineName = options.text();
             var audit1 = options.val().split(":")[1]
+            
+            if (medicineName.indexOf("(需审核)")!=-1){
+                medicineName=medicineName.replace("(需审核)","")
+            }
 
-            audit = 1;
+            audit = 0;
             if (audit1 == 1) {
-                audit = 0;
+                audit = 1;
             }
 
             $.post("CaseMedicineAction.action",

@@ -128,7 +128,7 @@
                     </c:choose>
                 </td>
 
-                <% if (grade.equals("1")) { %>
+                <% if (grade.equals("1")||"4".equals(grade)) { %>
                 <td class="td-manage">
                     <a title="编辑" href="javascript:;"
                        onclick="user_management_edit('编辑','GetCase.action?id=${id}&returnTo=edit','4','900','500')"

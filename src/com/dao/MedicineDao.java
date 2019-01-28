@@ -45,7 +45,7 @@ public class MedicineDao {
     }
 
     public ArrayList<MedicineBean> getMedicine(HttpServletRequest request) {
-        String sql = "select * from Medicine where Maudit=1";
+        String sql = "select * from Medicine";
 
         sql = PageUtils.getPageSql(sql, "Medicine", "Mname", request);
 

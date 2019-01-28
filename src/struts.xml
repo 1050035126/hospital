@@ -28,6 +28,11 @@
             </result>
         </action>
 
+        <action name="UserRegisterAction" class="com.action.UserRegisterAction">
+            <result name="success" type="json">result
+            </result>
+        </action>
+
     </package>
 
 

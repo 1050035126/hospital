@@ -20,6 +20,8 @@ public class LoginD {
 			sql=String.format("select * from Houseman where Hname='%s' and Hpass='%s'", name,pass);
 		}else if(grade.equals("3")) {
 			sql=String.format("select * from Patient where Pname='%s' and Ppass='%s'", name,pass);
+		}else if(grade.equals("4")) {
+			sql=String.format("select * from manager where username='%s' and password='%s'", name,pass);
 		}
 		System.out.println(sql);
 		try {
@@ -45,8 +47,9 @@ public class LoginD {
 			return "H";
 		}else if(grade.equals("3")) {
 			return "p";
+		}else{
+			return "user";
 		}
-		return "";
 	}
 	public String getName() {
 		return name;

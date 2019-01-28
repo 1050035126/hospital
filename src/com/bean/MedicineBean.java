@@ -45,6 +45,10 @@ public class MedicineBean {
 	}
 	private String id;
 	private String name;
+	/**
+	 * 1标识 非管制类药品
+	 * 0标识 管制类药品
+	 */
 	private String audit;
 	private String doctor;
 	private String patient;
