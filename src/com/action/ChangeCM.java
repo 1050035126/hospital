@@ -2,7 +2,13 @@ package com.action;
 
 import com.dao.ChangeCMDao;
 import com.opensymphony.xwork2.ActionSupport;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+/**
+ * 修改病历和药物
+ */
 @SuppressWarnings("serial")
 public class ChangeCM  extends ActionSupport{
 	public String getType() {
@@ -34,11 +40,33 @@ public class ChangeCM  extends ActionSupport{
 	private String type;
 	private String id;
 	private String text;
-	public String execute(){
+	private String preDoctor;
+	private String createTime;
+
+
+	public String execute() throws ParseException {
 		System.out.println(String.format("接受到的数据为：1->%s\t2->%s\t3->%s",id,type,text));
 		ChangeCMDao ccmd=new ChangeCMDao();
 		if(type.equals("case")) {
-			ccmd.changeCase(id, text,doctor);
+			if (doctor==null){
+				ccmd.changeCase(id, text,preDoctor);
+				return SUCCESS;
+			}
+			//允许医生进行更换，但只允许修改当日病历，不允许修改历史病历
+			if (!preDoctor.equals(doctor)){
+				Date date = new Date();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String presentTime=sdf.format(date);
+				if (!presentTime.equals(createTime)){
+					return INPUT;
+				}else{
+					ccmd.changeCase(id, text,doctor);
+					return SUCCESS;
+				}
+			}else{
+				ccmd.changeCase(id, text,doctor);
+				return SUCCESS;
+			}
 		}else if(type.equals("medicine")) {
 			ccmd.changeMedicine(id, text);
 		}else {
@@ -49,5 +77,22 @@ public class ChangeCM  extends ActionSupport{
 		}else {
 			return INPUT;
 		}
+	}
+
+
+	public String getPreDoctor() {
+		return preDoctor;
+	}
+
+	public void setPreDoctor(String preDoctor) {
+		this.preDoctor = preDoctor;
+	}
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
 	}
 }

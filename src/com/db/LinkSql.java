@@ -20,9 +20,9 @@ public class LinkSql {
 	public LinkSql(){
 		System.out.println("pass="+password+" user"+user);
 		try {  
-            Class.forName(name);//链接
-            conn = DriverManager.getConnection(url, user, password);//链接  
-            System.out.println("连接成功");
+            Class.forName(name);//����
+            conn = DriverManager.getConnection(url, user, password);//����  
+            System.out.println("���ӳɹ�");
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
@@ -35,7 +35,7 @@ public class LinkSql {
 
 	public void changeMySqlDate(String sql) {
 		try {
-			System.out.println("接受到的Sql语句（插入删除类的）："+sql);
+			System.out.println("���ܵ���Sql��䣨����ɾ����ģ���"+sql);
 			pst=conn.prepareStatement(sql);
 			check=pst.executeUpdate();
 //			pst.close();
@@ -51,7 +51,7 @@ public class LinkSql {
 	
 	public ResultSet selectSqlDate(String sql) {
 		try {
-			System.out.println("接受到的Sql语句（选择类的）："+sql);
+			System.out.println("���ܵ���Sql��䣨ѡ����ģ���"+sql);
 			pst=conn.prepareStatement(sql);
 			ret = pst.executeQuery();
 			return ret;

@@ -71,17 +71,17 @@ public class CaseDao {
 	}
 
 	/**
-	 * 实习医生查看病历
+	 * 医生查看病历
 	 * @param request
 	 * @return
 	 */
-	public ArrayList<CaseBean> getCase(int waitToUpdate,HttpServletRequest request){
+	public ArrayList<CaseBean> getCase(int waitToUpdate,String name,HttpServletRequest request){
 		request.setAttribute("waitToUpdate", waitToUpdate);
 
 		String sql="select * from `Case`";
 
 		if (waitToUpdate==1){
-			sql="select * from `case` c where c.Cpatient in(SELECT p.Pname from patient p where p.Pcure in('手术治疗','住院治疗')) ";
+			sql="select * from `case` c where c.Cpatient in(SELECT p.Pname from patient p where p.Pcure in('手术治疗','住院治疗')) and c.Cdoctor='"+name+"'";
 		}
 		sql = PageUtils.getPageSql(sql, "Case", "Cpatient", request);
 

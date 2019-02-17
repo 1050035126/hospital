@@ -24,7 +24,7 @@ public class ChangeMassDao {
 		String sql=String.format("update Patient set Pname='%s',Psex='%s',Page='%s',Pphone='%s',Pemail='%s',Pdoctor='%s',Pcure='%s',Pnurse='%s' where Pid='%s'"
 				,name,sex,age,phone,email,doctor,cure,nurse,id);
 		runSql(sql);
-		String sql2=String.format("update `Case` set Cdoctor='%s' where Cpatient='%s' and DATEDIFF(Ctime,NOW())=0",doctor,id);
+		String sql2=String.format("update `Case` set Cdoctor='%s' where Cpatient='%s'",doctor,id);
 		nextRunSql(sql2);
 	}
 	private void runSql(String sql) {

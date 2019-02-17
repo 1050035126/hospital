@@ -52,14 +52,14 @@
         </div>
     </form>
     <xblock>
-        <% if (!grade.equals("3")) { %>
+        <% if (!grade.equals("3")&&!grade.equals("4")) { %>
         <button class="layui-btn"
                 onclick="user_management_add('添加病例','PatientId.action?type=case','600','500')"><i
                 class="layui-icon">&#xe608;</i>添加
         </button>
 
         <button id="toChangeCaseListButton" onclick="toChangeCaseList()" class="layui-btn">
-            查看待更新病历
+            查看待我更新病历
         </button>
         <%} %>
         <span class="x-right" style="line-height:25px">共有数据：${count}条</span></xblock>
@@ -130,7 +130,7 @@
 
                 <% if (grade.equals("1")||"4".equals(grade)) { %>
                 <td class="td-manage">
-                    <a title="编辑" href="javascript:;"
+                    <a ${(grade eq 4)||(doctor eq name)?"":"style='display:none'"}  title="编辑" href="javascript:;"
                        onclick="user_management_edit('编辑','GetCase.action?id=${id}&returnTo=edit','4','900','500')"
                        class="ml-5" style="text-decoration:none">
                         <i class="layui-icon">&#xe642;</i>
@@ -169,16 +169,15 @@
         var waitToUpdate = ${waitToUpdate};
         var url = '';
         if (waitToUpdate == 0) {
-            $("#toChangeCaseListButton").text("查看待更新病历");
+            $("#toChangeCaseListButton").text("查看待我更新病历");
             url="Case.action?waitToUpdate=1"
         } else {
             $("#toChangeCaseListButton").text("查看所有病历");
             url="Case.action?waitToUpdate=0"
         }
 
-
         toChangeCaseList = function () {
-            window.location.href = url;
+            window.location.href = url+"&name="+"${name}";
         }
 
 

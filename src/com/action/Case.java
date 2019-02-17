@@ -47,7 +47,8 @@ public class Case extends ActionSupport {
         if ("3".equals(grade)) {
             acb = cd.getCase(name, ServletActionContext.getRequest());
         } else {
-                acb = cd.getCase(waitToUpdate,ServletActionContext.getRequest());
+            //获取所有病历
+                acb = cd.getCase(waitToUpdate,name,ServletActionContext.getRequest());
         }
         return SUCCESS;
     }

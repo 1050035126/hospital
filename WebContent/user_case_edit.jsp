@@ -20,14 +20,39 @@
 </head>
 
 <body>
+<%
+    String grade = request.getSession().getAttribute("grade").toString();
+    String name = request.getSession().getAttribute("username").toString();
+%>
 
 <div class="x-body">
-    <form class="layui-form" action="ChangeCM.action?type=case&id=${caseBean.id}&doctor=${caseBean.doctor}"
+    <form class="layui-form"
+          action="ChangeCM.action?type=case&id=${caseBean.id}"
           method="post">
-        <label for="L_email" class="layui-form-label">
-            <span class="x-red">*</span>ID</label>
-        <div class="layui-input-inline">
-            <input type="text" id="L_username" disabled="" value="${caseBean.patient}" class="layui-input">
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>病人</label>
+            <div class="layui-input-inline">
+        <span name="text"
+              class="">${caseBean.patient}</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <input name="preDoctor" style="display: none" type="text" value="${caseBean.doctor}"
+                   class="layui-input">
+            <input name="createTime" style="display: none"  value="${caseBean.time}"
+            >
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>医生</label>
+            <div class="layui-input-inline">
+                <select ${grade eq 4?"":"disabled"}  name="doctor" class="layui-input">
+                    <s:iterator id="list" value="adi">
+                        <option ${name eq caseBean.doctor?"selected":""} value="${name}">${id}&nbsp;&nbsp;${name}</option>
+                    </s:iterator>
+                </select>
+            </div>
         </div>
 
         <div class="layui-form-item">
@@ -60,7 +85,10 @@
                                         ${item.audit eq "-1"?"审核未通过":""}
                                 </td>
                                 <td>
-                                    <button type="button" onclick="toDeleteMedicine(${item.id},this)" class="layui-btn layui-btn-danger">删除</button>
+                                    <button type="button"
+                                            onclick="toDeleteMedicine(${item.id},this)"
+                                            class="layui-btn layui-btn-danger">删除
+                                    </button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -69,12 +97,14 @@
                 <div style="float: left;margin-left: 30px">
                     选择药物：<select id="medicineName">
                     <c:forEach var="item" items="${medicineList}">
-                        <option value="${item.name}:${item.audit}" >${item.name}${item.audit==0?"(需审核)":""}</option>
+                        <option value="${item.name}:${item.audit}">${item.name}${item.audit==0?"(需审核)":""}</option>
                     </c:forEach>
                 </select>
                     选择数量：<input id="medicineQuantity" class="layui-input"/>
 
-                    <button type="button" onclick="toAddMedicine(${caseBean.id})" class="layui-btn">添加药物</button>
+                    <button type="button" onclick="toAddMedicine(${caseBean.id})" class="layui-btn">
+                        添加药物
+                    </button>
                 </div>
             </div>
         </div>
@@ -115,7 +145,7 @@
         }
 
         toDeleteMedicine = function (id, trObject) {
-            if (!confirm("确定删除？")){
+            if (!confirm("确定删除？")) {
                 return
             }
 
@@ -138,9 +168,9 @@
             var options = $("#medicineName option:selected");
             var medicineName = options.text();
             var audit1 = options.val().split(":")[1]
-            
-            if (medicineName.indexOf("(需审核)")!=-1){
-                medicineName=medicineName.replace("(需审核)","")
+
+            if (medicineName.indexOf("(需审核)") != -1) {
+                medicineName = medicineName.replace("(需审核)", "")
             }
 
             audit = 0;

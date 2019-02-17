@@ -2,9 +2,11 @@ package com.action;
 
 import com.bean.CaseBean;
 import com.bean.CaseMedicine;
+import com.bean.DoctorIdBean;
 import com.bean.MedicineBean;
 import com.dao.CaseDao;
 import com.dao.CaseMedicineDao;
+import com.dao.DoctorIdDao;
 import com.dao.MedicineDao;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,6 +20,16 @@ public class GetCase extends ActionSupport {
     public List<CaseMedicine> caseMedicineList;
     public ArrayList<MedicineBean> medicineList;
 
+    public ArrayList<DoctorIdBean> getAdi() {
+        return adi;
+    }
+
+    public void setAdi(ArrayList<DoctorIdBean> adi) {
+        this.adi = adi;
+    }
+
+    private ArrayList<DoctorIdBean> adi;
+
     public String execute() {
         CaseDao cd = new CaseDao();
         caseBean = cd.getCaseById(id);
@@ -28,6 +40,9 @@ public class GetCase extends ActionSupport {
         if ("show".equals(returnTo)) {
             return INPUT;
         } else {
+            DoctorIdDao did = new DoctorIdDao();
+            adi = did.getDoctorId();
+
             MedicineDao medicineDao = new MedicineDao();
             medicineList = medicineDao.getMedicineAll();
             return SUCCESS;

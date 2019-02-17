@@ -8,10 +8,16 @@ public class ChangeCMDao {
 	public ChangeCMDao() {
 		ls=new LinkSql();
 	}
-	
+
+	/**
+	 * 修改病历
+	 * @param id
+	 * @param text
+	 * @param doctor
+	 */
 	public void changeCase(String id,String text,String doctor) {
-		String sql=String.format("update `Case` set Ccase='%s' where Cid='%s' and Cdoctor='%s' and DATEDIFF(Ctime,NOW())=0"
-				, text,id,doctor);
+		String sql=String.format("update `Case` set Ccase='%s' , Cdoctor='%s' where Cid='%s'  "
+				, text,doctor,id);
 		runSql(sql);
 	}
 	public void changeMedicine(String id,String text) {
